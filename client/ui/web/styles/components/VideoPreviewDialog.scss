@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+$white: #FFFFFF;
+$black: #333333;
+$gray: #E3E3E3;
+$blue: #00BCD4;
+$black-light: #2B2D2E;
+@media screen and (min-width: 450px) {
+
+}
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  max-height: 800px;
+  .videoContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    .videoPlayerContainer {
+      flex: 1;
+      display: flex;
+      .videoPlayer {
+        flex: 1;
+        video {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+    .actionContainer {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .approveContainer, .disapproveContainer {
+        border: 2px solid #00c853;
+        border-radius: 3px;
+        padding: 5px 10px;
+        cursor: pointer;
+        color: #00c853;
+        i {
+          color: #00c853 !important;
+        }
+      }
+      .disapproveContainer {
+        margin-left: 30px;
+        border: 2px solid #FF0000;
+        color: #FF0000;
+        i {
+          color: #FF0000 !important;
+        }
+      }
+      .approveContainer:active, .disapproveContainer:active {
+        opacity: 0.5;
+      }
+    }
+  }
+  .videoListContainer {
+    width: 250px;
+    margin-top: 30px;
+    padding: 0px 20px;
+    border-left: 1px solid #D6D6D6;
+    overflow-y: scroll;
+    padding-right: 17px;
+    .label {
+      font-weight: 700;
+      display: flex;
+      flex-direction: row;
+      .count {
+        margin-left: 5px;
+        color: #FF5500;
+      }
+    }
+
+    .videoItem {
+      position: relative;
+      margin: 10px 0px;
+      width: 200px;
+      height: 125px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #000;
+      cursor: pointer;
+      .imgThumb {
+        width: 200px;
+        height: 125px;
+        background-repeat: no-repeat !important
+      }
+      .iconContainer {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .duration {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        background-color: #000;
+        padding: 0px 5px;
+        color: #FFF;
+      }
+    }
+    .videoItem:hover {
+      opacity: 0.5;
+    }
+  }
+}

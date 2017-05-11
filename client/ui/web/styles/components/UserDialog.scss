@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+$white: #FFFFFF;
+$black: #333333;
+$gray: #E3E3E3;
+$blue: #00BCD4;
+$black-light: #2B2D2E;
+.background {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .dialog {
+    width: 450px;
+    height: 600px;
+    background-color: #FFF;
+    display: flex;
+    flex-direction: column;
+    .title {
+      font-size: 20px !important;
+      font-weight: 800;
+      margin: 20px;
+    }
+    .subTitle {
+      margin: 0px 20px;
+      font-size: 13px !important;
+      font-weight: 200;
+      color: #888;
+    }
+    .searchUserContainer {
+      height: 50px;
+      padding: 0px 20px;
+      display: flex;
+      margin-top: 20px;
+      align-self: stretch;
+      border-top: 2px solid #EEE;
+      border-bottom: 2px solid #EEE;
+      align-items: center;
+      .inputUser {
+        padding: 0px;
+        flex: 1;
+        input {
+          border: 0px;
+          line-height: 30px;
+          font-size: 13px !important;
+          font-weight: 200;
+          color: #888;
+          height: 30px;
+          padding-left: 20px;
+        }
+        label {
+          top: 0px;
+          bottom: 0px;
+          display: flex;
+          align-items: center;
+          padding-left: 20px;
+        }
+        label:after {
+          background-color: transparent;
+        }
+      }
+      .iconSearch {
+        input {
+          display: none;
+        }
+        i {
+          font-size: 30px !important;
+        }
+      }
+    }
+    .userList {
+      flex: 1;
+      overflow-y: scroll;
+      .listUserItem {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 20px;
+        cursor: pointer;
+        .userImage {
+          width: 40px;
+          height: 40px;
+          border-radius: 20px;
+        }
+        .userName {
+          flex: 1;
+          margin-left: 15px;
+          font-weight: 700;
+          color: #555;
+        }
+        .videoCount {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          font-weight: 500;
+          .count {
+            margin-right: 10px;
+            color: #F50;
+          }
+        }
+        .checkIconContainer {
+          margin-left: 10px;
+          button {
+            cursor: pointer;
+          }
+        }
+      }
+      .listUserItem:hover {
+        background-color: #EEE;
+      }
+      .listUserItem:active {
+        opacity: 0.6;
+        background-color: #EEE;
+      }
+    }
+    .buttonContainer {
+      padding: 20px 15px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      border-top: 2px solid #EEE;
+      .cancelButton, .assignButton, .disabledAssignButton {
+        padding: 8px 0px;
+        cursor: pointer;
+        width: 130px;
+        border: 2px solid #EEE;
+        text-align: center;
+        font-size: 15px !important;
+        color: #333;
+        border-radius: 3px;
+      }
+      .assignButton, .disabledAssignButton {
+        margin-left: 50px;
+        background-color: #F50;
+        border: 2px solid #F50;
+        color: #FFF;
+      }
+      .disabledAssignButton {
+        background-color: transparent;
+        border: 2px solid #EEE;
+        color: #333;
+      }
+      .cancelButton:hover, .assignButton:hover {
+        opacity: 0.9;
+      }
+      .cancelButton:active, .assignButton:active {
+        opacity: 0.5;
+      }
+    }
+  }
+}

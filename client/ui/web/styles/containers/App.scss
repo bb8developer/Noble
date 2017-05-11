@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+$white: #FFFFFF;
+$black: #333333;
+$gray: #E3E3E3;
+$blue: #00BCD4;
+$black-light: #2B2D2E;
+.root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.greeting {
+  background-color: $blue;
+  color: $white;
+  padding-top: 50px;
+  text-align: center;
+}
+
+.sawasdee {
+  font-size: 2.5em;
+  font-weight: normal;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+}
+
+/**
+ * Responsive text
+ */
+
+@media screen and (max-width: 992px) {
+  .greeting {
+    padding-top: 20px;
+  }
+  p, .btn, .btn_1, input, div, h4, sup {
+    font-size: 99% !important;
+  }
+  h1 {
+    font-size: 34px !important;
+  }
+  h2 {
+    font-size: 32px !important;
+  }
+  h3 {
+    font-size: 28px !important;
+  }
+  .btn, .btn_1 {
+    height: 34px !important;
+    padding: 6px 12px !important;
+    font-size: 14px !important;
+    line-height: 1.42857143 !important;
+    border-radius: 4px !important;
+  }
+  select {
+    height: 34px !important;
+    line-height: 34px !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  p, .btn, .btn_1, input, div, h4, sup {
+    font-size: 98% !important;
+  }
+  h1 {
+    font-size: 30px !important;
+  }
+  h2 {
+    font-size: 28px !important;
+  }
+  h3 {
+    font-size: 26px !important;
+  }
+  .btn, .btn_1 {
+    height: 30px !important;
+    padding: 5px 10px !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    border-radius: 3px !important;
+  }
+  select {
+    height: 30px !important;
+    line-height: 30px !important;
+  }
+  button {
+    font-size: 11px !important;
+    padding: 0 3px !important;
+  }
+}
+
+@media screen and (max-width: 512px) {
+  p, .btn, .btn_1, input, div, h4, sup {
+    font-size: 97% !important;
+  }
+  h1 {
+    font-size: 28px !important;
+  }
+  h2 {
+    font-size: 26px !important;
+  }
+  h3 {
+    font-size: 24px !important;
+  }
+  .btn, .btn_1 {
+    height: 28px !important;
+    padding: 5px 10px !important;
+    font-size: 11px !important;
+    line-height: 1.5 !important;
+    border-radius: 3px !important;
+  }
+  select {
+    height: 30px !important;
+    line-height: 30px !important;
+  }
+}
+:global {
+  .absoluteHeaderContainer {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 100%;
+    height: calc(100% - 10px);
+    z-index: -1;
+  }
+  .loginSignupContainer, .mobileLoginSignupContainer{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+    background-color: #E7EBED;
+    .mdl-textfield {
+      width: 275px;
+    }
+    .mdl-textfield__label {
+      visibility: visible !important;
+      top: -5px !important;
+    }
+    .mdl-textfield__label:after {
+      background-color: transparent !important;
+    }
+    .mdl-textfield__input {
+      border: 2px solid #E3DCDC !important;
+      border-radius: 5px;
+      height: 30px !important;
+      font-size: 15px !important;
+      padding-left: 5px;
+    }
+    .mdl-textfield.mdl-js-textfield.is-focused {
+      .mdl-textfield__input {
+        border: 2px solid #FF5500 !important;
+      }
+    }
+    .mdl-checkbox__box-outline {
+      width: 20px;
+      height: 20px;
+      top: 2px;
+      border: 2px solid #E3DCDC;
+      border-radius: 5px;
+    }
+    .mdl-checkbox.is-checked .mdl-checkbox__box-outline {
+      border: 2px solid #FF5500;
+      border-radius: 5px;
+    }
+    .mdl-checkbox__label {
+      margin-left: 5px;
+    }
+  }
+  .mobileLoginSignupContainer {
+    padding: 20px 0px;
+    @media screen and (max-width: 580px) {
+      .mdl-textfield {
+        width: 355px;
+      }
+    }
+    @media screen and (max-width: 512px) {
+      .mdl-textfield {
+        width: 295px;
+      }
+    }
+    @media screen and (max-width: 450px) {
+      .mdl-textfield {
+        width: 315px;
+      }
+    }
+    @media screen and (max-width: 400px) {
+      .mdl-textfield {
+        width: 285px;
+      }
+    }
+    @media screen and (max-width: 350px) {
+      .mdl-textfield {
+        width: 245px;
+      }
+    }
+  }
+}
+.loadingContainer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  .loadingImage {
+    width: 60px;
+    height: 60px;
+  }
+}

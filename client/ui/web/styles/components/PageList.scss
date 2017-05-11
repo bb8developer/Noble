@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+.pageListContainer {
+  margin-top: 10px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+}
+.inactivePage, .activePage, .pageLabel {
+  margin-left: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+  z-index: 4;
+  font-weight: 700;
+  font-size: 14px !important;
+}
+.activePage {
+  color: #f00;
+}
