@@ -12,7 +12,7 @@ let devtool;
 let plugins;
 
 const htmlTemplate = new HtmlWebpackPlugin({
-  title: 'Blitz TV Content Review System',
+  title: 'Noble Project',
   template: './client/index.html',
   mobile: true,
   inject: false

@@ -1,0 +1,2 @@
+# Ignore eslint files
+server/services/crm/agilecrm.js
