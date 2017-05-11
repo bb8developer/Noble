@@ -35,6 +35,7 @@ if (config.env === 'development') {
   // Launch Relay by using webpack.config.js
   relayServer = new WebpackDevServer(webpack(webpackConfig), {
     contentBase: '/build/',
+    public: '172.20.2.75',
     proxy: {
       '/graphql': `http://localhost:${config.graphql.port}`
     },

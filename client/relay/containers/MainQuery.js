@@ -6,6 +6,7 @@ export default {
   fragments: {
     viewer: () => Relay.QL`
       fragment on ViewerType {
+        id
       }`
   }
 };

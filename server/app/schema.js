@@ -39,5 +39,5 @@ const mutationType = new GraphQLObjectType({
  */
 export default new GraphQLSchema({
   query: queryType,
-  mutation: mutationType
+  // mutation: mutationType
 });

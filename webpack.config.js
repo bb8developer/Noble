@@ -18,6 +18,9 @@ const htmlTemplate = new HtmlWebpackPlugin({
   inject: false
 });
 const favIcon = new FaviconsWebpackPlugin('./client/assets/logo.png');
+const postCssPlugin =  new webpack.LoaderOptionsPlugin({
+  options: { postcss: [precss, autoprefixer] }
+});
 
 if (process.env.NODE_ENV === 'production') {
   appEntry = ['babel-polyfill', path.join(__dirname, 'client/index.js')];
@@ -25,7 +28,10 @@ if (process.env.NODE_ENV === 'production') {
   plugins = [
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: 'vendor.js'
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')
@@ -38,32 +44,37 @@ if (process.env.NODE_ENV === 'production') {
       }
     }),
     htmlTemplate,
-    favIcon
+    favIcon,
+    postCssPlugin
   ];
 } else {
   appEntry = [
     'babel-polyfill',
     path.join(__dirname, 'client/index.js'),
-    'webpack-dev-server/client?http://172.20.2.78:3000',
+    'webpack-dev-server/client?http://172.20.2.75:3000',
     'webpack/hot/only-dev-server'
   ];
   devtool = 'eval';
   plugins = [
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
-    new webpack.NoErrorsPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: 'vendor.js'
+    }),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       __DEV__: true
     }),
     htmlTemplate,
-    favIcon
+    favIcon,
+    postCssPlugin
   ];
 }
 
 module.exports = {
   entry: {
     app: appEntry,
-    vendor: ['react', 'react-dom', 'react-mdl', 'react-relay', 'react-router', 'react-router-relay', 'react-html5video']
+    vendor: ['react', 'react-dom', 'react-mdl', 'react-relay', 'react-router', 'react-router-relay']
   },
   output: {
     path: path.join(__dirname, 'build'),
@@ -84,19 +95,25 @@ module.exports = {
       exclude: /node_modules/
     }, {
       test: /\.css$/,
-      loaders: ['style', 'css?-colormin']
+      loaders: ['style-loader', 'css-loader?-colormin']
     }, {
       test: /\.scss$/,
-      loaders: [
-        'style',
-        'css?modules&importLoaders=1' +
-          '&localIdentName=[name]__[local]___[hash:base64:5]!postcss'
-      ]
+      use: [
+        { loader: 'style-loader' },
+        { loader: 'css-loader', options: { modules: true, importLoaders: 1 } },
+        {
+          loader: 'postcss-loader',
+          options: {
+            plugins: () => {
+              return [ precss, autoprefixer]
+            }
+          }
+        },
+      ],
     }, {
       test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
       loader: 'url-loader?limit=10000&name=assets/[hash].[ext]'
     }]
   },
-  postcss: () => [precss, autoprefixer],
   plugins
 };
