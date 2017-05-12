@@ -33,6 +33,10 @@ $borderColor: #999;
   .notes {
     flex: 2
   }
+  .viewNote {
+    color: #1b59d4;
+    cursor: pointer;
+  }
 }
 .grayContainer {
   background-color: #F0F0F0;

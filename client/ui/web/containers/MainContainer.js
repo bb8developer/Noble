@@ -1,7 +1,7 @@
 import React from 'react';
 import { isEqual } from 'lodash';
 import MainContainerAction from '../../action/MainContainerAction';
-import { InfiniteScroll, CRMItem, CRMItemHeader } from '../../components';
+import { InfiniteScroll, CRMItem, CRMItemHeader, ContactNoteDialog } from '../../components';
 import { GetMoreCRMItemsMutation } from '../../../relay/mutations';
 import { commitUpdate } from '../../../utils';
 import ImageWaiting from '../../../assets/loading.gif';
@@ -12,7 +12,10 @@ export default class MainContainer extends MainContainerAction {
     super(props);
     this.state = {
       hasMore: true,
-      items: this.getItems(props)
+      items: this.getItems(props),
+      showNoteDialog: true,
+      notes: [],
+      name: ''
     };
   }
   componentWillReceiveProps(newProps) {
@@ -45,6 +48,9 @@ export default class MainContainer extends MainContainerAction {
     }
     return [];
   }
+  showNote = (notes, name) => {
+    this.setState({ showNoteDialog: true, notes, name });
+  };
   renderLoader() {
     return (
       <div className={styles.loader}>
@@ -54,7 +60,7 @@ export default class MainContainer extends MainContainerAction {
     );
   }
   render() {
-    const { items } = this.state;
+    const { items, showNoteDialog, notes } = this.state;
     return (
       <div className={styles.container}>
         <div className={styles.header}>
@@ -68,10 +74,18 @@ export default class MainContainer extends MainContainerAction {
           >
             <CRMItemHeader />
             {items.map((item, index) => (
-              <CRMItem item={item} key={item.id} index={index} />
+              <CRMItem
+                item={item}
+                key={item.id}
+                index={index}
+                showNote={this.showNote}
+              />
             ))}
           </InfiniteScroll >
         </div>
+        {showNoteDialog &&
+        <ContactNoteDialog notes={notes} />
+        }
       </div>
     );
   }

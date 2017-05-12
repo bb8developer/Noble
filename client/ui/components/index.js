@@ -4,3 +4,4 @@
 export { InfiniteScroll } from './InfiniteScroll';
 export { CRMItem } from './CRMItem';
 export { CRMItemHeader } from './CRMItemHeader';
+export { ContactNoteDialog } from './ContactNoteDialog';

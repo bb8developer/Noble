@@ -1,0 +1,47 @@
+.container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(240, 240, 240, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .dialogContainer {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: white;
+    min-height: 400px;
+    width: 600px;
+    border-radius: 10px;
+    .title {
+      padding: 15px;
+      border-bottom: 1px solid #EEE;
+      font-weight: bold;
+    }
+    .noteList {
+      flex: 1
+    }
+    .bottom {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      padding: 20px;
+      .button {
+        padding: 10px;
+        cursor: pointer;
+        padding-left: 20px;
+        padding-right: 20px;
+        color: #fff;
+        background-color: #337ab7;
+        border: 1px solid #2e6da4;
+        border-radius: 4px;
+      }
+      .button:hover {
+        background-color: #2e6da4;
+      }
+    }
+  }
+}
