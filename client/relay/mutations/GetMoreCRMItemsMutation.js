@@ -1,10 +1,19 @@
 import Relay from 'react-relay';
-import { CRMItemFragment } from '../fragments';
 
 const fatQuery = Relay.QL`
   fragment on getMoreCRMItemsPayload {
     crmItems {
-      ${CRMItemFragment}
+      id,
+      cursor,
+      owner {
+        name,
+        id,
+        email,
+        phone,
+      },
+      created_time,
+      properties,
+      note
     }
   }
 `;

@@ -3,6 +3,9 @@ type CRMItem implements Node {
   # The ID of an object
   id: ID!
 
+  # Next cursor
+  cursor: String
+
   # CRM type
   type: String
 
@@ -178,6 +181,6 @@ input getMoreCRMItemsInput {
 }
 
 type getMoreCRMItemsPayload {
-  crmItems: ListCRMItems
+  crmItems: [CRMItem]
   clientMutationId: String
 }

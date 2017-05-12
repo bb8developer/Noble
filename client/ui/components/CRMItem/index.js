@@ -20,7 +20,6 @@ export const CRMItem = ({ item, index }) => {
   });
   const notes = JSON.parse(item.note);
   const note = notes.length > 0 ? notes[0] : null;
-  console.log(note);
   return (
     <div className={`${styles.rowContainer} ${rowStyle}`}>
       <div className={styles.name}>

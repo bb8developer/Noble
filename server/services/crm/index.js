@@ -24,7 +24,6 @@ export function getNoteById(contactID) {
   return new Promise((resolve, reject) => {
     function success(data) {
       resolve(data);
-      console.log('getNoteById success', new Date());
     }
     function error() {
       console.log('error on resolve');

@@ -1,37 +1,56 @@
 import React from 'react';
-import _ from 'lodash';
+import { isEqual } from 'lodash';
 import MainContainerAction from '../../action/MainContainerAction';
 import { InfiniteScroll, CRMItem, CRMItemHeader } from '../../components';
+import { GetMoreCRMItemsMutation } from '../../../relay/mutations';
+import { commitUpdate } from '../../../utils';
 import styles from '../styles/containers/MainContainer.scss';
 
 export default class MainContainer extends MainContainerAction {
   constructor(props) {
     super(props);
     this.state = {
-      items: _.range(1, 30),
-      hasMore: true
+      hasMore: true,
+      items: this.getItems(props)
     };
   }
+  componentWillReceiveProps(newProps) {
+    if (!isEqual(newProps.viewer, this.props.viewer)) {
+      this.setState({ items: this.getItems(newProps) });
+    }
+  }
   loadMore = () => {
-    console.log('load');
-    setTimeout(() => {
-      this.setState({
-        items: _.range(1, 50),
-        hasMore: false
-      });
-    }, 1000);
+    const cursor = this.getCursor();
+    if (cursor && cursor.length > 0) {
+      commitUpdate(GetMoreCRMItemsMutation, { cursor })
+        .then((res) => {
+          console.log('GetMoreCRMItemsMutation', res);
+          const items = res.getMoreCRMItems.crmItems;
+          const newItems = this.state.items.concat(items);
+          this.setState({ items: newItems });
+        });
+    }
   };
+  getCursor() {
+    const length = this.state.items.length;
+    if (length > 0) {
+      return this.state.items[length - 1].cursor;
+    }
+    return '';
+  }
+  getItems(props) {
+    if (props.viewer && props.viewer.crmItems) {
+      return props.viewer.crmItems.items;
+    }
+    return [];
+  }
   renderLoader() {
     return (
       <div className='loader'>Loading ...</div>
     );
   }
   render() {
-    console.log('this.props', this.props);
-    let items = [];
-    if (this.props.viewer && this.props.viewer.crmItems) {
-      items = this.props.viewer.crmItems.items;
-    }
+    const { items } = this.state;
     return (
       <div className={styles.container}>
         <div className={styles.header}>
@@ -41,11 +60,11 @@ export default class MainContainer extends MainContainerAction {
           <InfiniteScroll
             loader={this.renderLoader()}
             loadMore={this.loadMore}
-            hasMore={this.state.hasMore}
+            hasMore={this.getCursor().length > 0}
           >
             <CRMItemHeader />
             {items.map((item, index) => (
-              <CRMItem item={item} id={item.id} index={index} />
+              <CRMItem item={item} key={item.id} index={index} />
             ))}
           </InfiniteScroll >
         </div>
