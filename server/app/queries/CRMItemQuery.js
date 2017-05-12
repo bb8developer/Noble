@@ -22,6 +22,7 @@ export const CRMItemQuery = {
     const ret = { id: '', items: [] };
     const cursor = args.cursor || '';
     const pageSize = args.pageSize || 20;
+    console.log('get items');
     const result = await getContactByTagFilter('affiliate_goldadvisor', cursor, pageSize);
     await getNoteByContacts(result);
     ret.items = result;

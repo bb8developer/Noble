@@ -13,24 +13,26 @@ import schema from './app/schema';
 
 require('babel-polyfill');
 let relayServer = null;
+
+const graphql = express();
+graphql.use(cors());
+graphql.use(session({ secret: 'some unusual secret', cookie: { maxAge: 60000 } }));
+graphql.use('/', graphQLHTTP(request => ({
+  graphiql: true,
+  pretty: true,
+  schema,
+  context: { request },
+  formatError: (error) => {
+    console.log('formatError', error);
+    return error;
+  },
+})));
+graphql.listen(config.graphql.port, () =>
+  console.log(chalk.green(`GraphQL is listening on port ${config.graphql.port}`))
+);
+
 if (config.env === 'development') {
   // Launch GraphQL
-  const graphql = express();
-  graphql.use(cors());
-  graphql.use(session({ secret: 'some unusual secret', cookie: { maxAge: 60000 } }));
-  graphql.use('/', graphQLHTTP(request => ({
-    graphiql: true,
-    pretty: true,
-    schema,
-    context: { request },
-    formatError: (error) => {
-      console.log('formatError', error);
-      return error;
-    },
-  })));
-  graphql.listen(config.graphql.port, () =>
-    console.log(chalk.green(`GraphQL is listening on port ${config.graphql.port}`))
-  );
 
   // Launch Relay by using webpack.config.js
   relayServer = new WebpackDevServer(webpack(webpackConfig), {
@@ -69,10 +71,6 @@ if (config.env === 'development') {
   relayServer.use(cors());
   relayServer.use(historyApiFallback());
   relayServer.use('/', express.static(path.join(__dirname, '../build')));
-  relayServer.use('/graphql', graphQLHTTP(request => ({
-    schema,
-    context: { request },
-  })));
 }
 
 relayServer.listen(config.port, () =>
