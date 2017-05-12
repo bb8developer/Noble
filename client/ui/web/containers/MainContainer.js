@@ -4,6 +4,7 @@ import MainContainerAction from '../../action/MainContainerAction';
 import { InfiniteScroll, CRMItem, CRMItemHeader } from '../../components';
 import { GetMoreCRMItemsMutation } from '../../../relay/mutations';
 import { commitUpdate } from '../../../utils';
+import ImageWaiting from '../../../assets/loading.gif';
 import styles from '../styles/containers/MainContainer.scss';
 
 export default class MainContainer extends MainContainerAction {
@@ -46,7 +47,10 @@ export default class MainContainer extends MainContainerAction {
   }
   renderLoader() {
     return (
-      <div className='loader'>Loading ...</div>
+      <div className={styles.loader}>
+        Loading more CRM information...
+        <div className={styles.loadingImage} style={{ background: `url(${ImageWaiting}) center / cover` }} />
+      </div>
     );
   }
   render() {

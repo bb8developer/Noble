@@ -12,4 +12,13 @@
     color: white;
     font-size: 18px;
   }
+  .loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .loadingImage {
+      width: 30px;
+      height: 30px;
+    }
+  }
 }
