@@ -1,12 +1,13 @@
 import { GraphQLString, GraphQLObjectType } from 'graphql';
-import { CRMItemQuery } from '../queries/CRMItemQuery';
 
-const ViewerType = new GraphQLObjectType({
-  name: 'ViewerType',
+const UserType = new GraphQLObjectType({
+  name: 'UserType',
   description: 'A viewer object',
   fields: () => ({
-    crmItems: CRMItemQuery,
+    id: {
+      type: GraphQLString
+    }
   })
 });
 
-export default ViewerType;
+export default UserType;

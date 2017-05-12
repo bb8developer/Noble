@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars, no-use-before-define */
 import { GraphQLSchema, GraphQLObjectType } from 'graphql';
 import { nodeField } from './nodeInterface';
-import ViewerQuery from './queries/ViewerQuery';
+import { ViewerQuery, UserQuery } from './queries';
 import {
   signupMutation,
   loginMutation,
@@ -18,7 +18,7 @@ const queryType = new GraphQLObjectType({
   name: 'Query',
   fields: () => ({
     node: nodeField,
-    viewer: ViewerQuery
+    viewer: ViewerQuery,
   })
 });
 

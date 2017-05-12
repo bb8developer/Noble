@@ -1,4 +1,5 @@
 import Relay from 'react-relay';
+import { CRMItemFragment } from '../fragments';
 
 export default {
   initialVariables: {
@@ -6,7 +7,9 @@ export default {
   fragments: {
     viewer: () => Relay.QL`
       fragment on ViewerType {
-        id
+        crmItems {
+          ${CRMItemFragment}
+        }
       }`
   }
 };

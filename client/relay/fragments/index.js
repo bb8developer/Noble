@@ -1,0 +1,1 @@
+export { CRMItemFragment } from './CRMItem';

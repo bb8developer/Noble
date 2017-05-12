@@ -1,3 +1,132 @@
+# CRM Item Information
+type CRMItem implements Node {
+  # The ID of an object
+  id: ID!
+
+  # CRM type
+  type: String
+
+  # Created time
+  created_time: Int
+
+  # Updated time
+  updated_time: Int
+
+  # Last contacted time
+  last_contacted: Int
+
+  # Last emailed time
+  last_emailed: Int
+
+  # Last campaign emailed time
+  last_campaign_emaild: Int
+
+  # Last called time
+  last_called: Int
+
+  # Last viewed time
+  viewed_time: Int
+
+  # Star value
+  star_value: Int
+
+  # Score value
+  lead_score: Int
+
+  # KLout value
+  klout_score: Int
+
+  # Tags
+  tags: String
+
+  # Tags time
+  tagsWithTime: String
+
+  # Properties value
+  properties: String
+
+  # Campaign Status
+  campaignStatus: String
+
+  # Entity Type
+  entity_type: String
+
+  # Unsubscribe Status
+  unsubscribeStatus: String
+
+  # Email bounce Status
+  emailBounceStatus: String
+
+  # Form ID
+  formId: Int
+
+  # Browser ID
+  browserId: String
+
+  # Lead source ID
+  lead_source_id: Int
+
+  # Lead Status ID
+  lead_status_id: Int
+
+  # Flag for Lead has been converted or not
+  is_lead_converted: Boolean
+
+  # Lead converted time
+  lead_converted_time: Int
+
+  # Flag for duplicated status
+  is_duplicate_existed: Boolean
+
+  # Trashed time
+  trashed_time: Int
+
+  # Restored time
+  restored_time: Int
+
+  # Owner Information
+  owner: CRMItemOwner
+}
+
+# CRM Item Owner information
+type CRMItemOwner {
+  # The ID of an object
+  id: ID!
+
+  # Domain
+  domain: String
+
+  # Email
+  email: String
+
+  # Phone
+  phone: String
+
+  # Name
+  name: String
+
+  # Owner Image
+  pic: String
+
+  # Owner Schedule ID
+  schedule_id: String
+
+  # Calendar URL
+  calendar_url: String
+
+  # Calendar URL
+  calendarURL: String
+}
+
+# Array of List CRM Information.
+type ListCRMItems implements Node {
+  # The ID of an object
+  id: ID!
+
+  # CRM Item list
+  items: [CRMItem]
+}
+
 # An object with an ID
 interface Node {
   # The id of the object.
@@ -16,7 +145,21 @@ type Query {
 }
 
 # A viewer object
-type ViewerType {
-  # Teset Type
+type UserType {
   id: String
+}
+
+# A viewer object
+type ViewerType {
+  # CRM Item Query
+  crmItems(
+    # Next CRM search cursor
+    cursor: String
+
+    # CRM Items Fetching size
+    pageSize: Int
+  ): ListCRMItems
+
+  # User query
+  user: UserType
 }

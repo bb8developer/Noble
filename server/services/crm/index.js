@@ -7,7 +7,7 @@ import config from '../../config/crm_config';
 const agileInstance = new AgileCRMManager(config.domain, config.key, config.user);
 const { contactAPI } = agileInstance;
 
-export function getContactByTagFilter(tag, cursor) {
+export function getContactByTagFilter(tag, cursor, pageSize = 20) {
   return new Promise((resolve, reject) => {
     function success(data) {
       console.log('getContactByTagFilter success');
@@ -17,6 +17,6 @@ export function getContactByTagFilter(tag, cursor) {
       console.log('getContactByTagFilter failuer');
       reject();
     }
-    contactAPI.getContactsByTagFilter(tag, cursor, success, error);
+    contactAPI.getContactsByTagFilter(tag, cursor, pageSize, success, error);
   });
 }

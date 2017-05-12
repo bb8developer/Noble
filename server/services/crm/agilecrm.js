@@ -1003,16 +1003,19 @@ ContactAPI.prototype.getContactsByPropertyFilter = function getContactsByPropert
   }
 };
 
-ContactAPI.prototype.getContactsByTagFilter = function getContactsByTagFilter(value, cursor, success, failure) {
+ContactAPI.prototype.getContactsByTagFilter = function getContactsByTagFilter(value, cursor, pageSize, success, failure) {
 
   var qs = require("querystring");
   // Build the post string from an object
-  var post_data = qs.stringify({
-    'page_size' : 25,
-    cursor: cursor,
+  const query = {
+    'page_size' : pageSize,
     'global_sort_key': '-created_time',
     'filterJson': '{"rules":[{"LHS":"tags","CONDITION":"EQUALS","RHS":"'+value+'"}],"contact_type":"PERSON"}'
-  });
+  };
+  if (cursor && cursor.length > 0) {
+    query.cursor = cursor;
+  }
+  var post_data = qs.stringify(query);
   console.log('post_data', post_data);
   var options = this.getOptions();
   options.path = '/dev/api/filters/filter/dynamic-filter';
