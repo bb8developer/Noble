@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import MainContainerAction from '../../action/MainContainerAction';
-import { InfiniteScroll, CRMItem } from '../../components';
+import { InfiniteScroll, CRMItem, CRMItemHeader } from '../../components';
 import styles from '../styles/containers/MainContainer.scss';
 
 export default class MainContainer extends MainContainerAction {
@@ -43,8 +43,9 @@ export default class MainContainer extends MainContainerAction {
             loadMore={this.loadMore}
             hasMore={this.state.hasMore}
           >
-            {items.map(item => (
-              <CRMItem item={item} id={item.id} />
+            <CRMItemHeader />
+            {items.map((item, index) => (
+              <CRMItem item={item} id={item.id} index={index} />
             ))}
           </InfiniteScroll >
         </div>

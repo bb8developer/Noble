@@ -1,0 +1,46 @@
+$borderColor: #999;
+
+.rowContainer {
+  display: flex;
+  flex-direction: row;
+  height: 30px;
+  border: 1px solid $borderColor;
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 5px;
+  }
+  .header {
+    font-weight: bold;
+  }
+  .name {
+    flex: 1;
+    border-right: 1px solid $borderColor;
+  }
+  .created {
+    flex: 1.5;
+    border-right: 1px solid $borderColor;
+  }
+  .lastNote {
+    flex: 3;
+    border-right: 1px solid $borderColor;
+  }
+  .lastNoteDate {
+    flex: 2;
+    border-right: 1px solid $borderColor;
+  }
+  .notes {
+    flex: 2
+  }
+}
+.grayContainer {
+  background-color: #F0F0F0;
+}
+.normalContainer, .grayContainer {
+  border: 0px solid $borderColor;
+  border-bottom: 1px solid $borderColor;
+}
+.normalContainer:hover, .grayContainer:hover {
+  background-color: #DDD;
+}
