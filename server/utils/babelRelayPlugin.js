@@ -1,6 +1,6 @@
 /* eslint-disable no-var, func-names, prefer-arrow-callback, global-require */
-import fs from 'fs';
-import path from 'path';
+var fs = require('fs');
+var path = require('path');
 
 const jsonFile = path.join(__dirname, '../app/schema.json');
 // Read the schema.json file only if it exists, this fixed
