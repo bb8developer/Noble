@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import MainContainerAction from '../../action/MainContainerAction';
-import { InfiniteScroll } from '../../components';
+import { InfiniteScroll, CRMItem } from '../../components';
 import styles from '../styles/containers/MainContainer.scss';
 
 export default class MainContainer extends MainContainerAction {
@@ -21,16 +21,30 @@ export default class MainContainer extends MainContainerAction {
       });
     }, 1000);
   };
+  renderLoader() {
+    return (
+      <div className='loader'>Loading ...</div>
+    );
+  }
   render() {
+    console.log('this.props', this.props);
+    let items = [];
+    if (this.props.viewer && this.props.viewer.crmItems) {
+      items = this.props.viewer.crmItems.items;
+    }
     return (
       <div className={styles.container}>
         <div className={styles.header}>
           <div>NOBLE GOLD AFFILIATE DASHBOARD1</div>
         </div>
         <div>
-          <InfiniteScroll loader={<div className="loader">Loading ...</div>} loadMore={this.loadMore} hasMore={this.state.hasMore}>
-            {this.state.items.map((item) => (
-              <div>item{item}</div>
+          <InfiniteScroll
+            loader={this.renderLoader()}
+            loadMore={this.loadMore}
+            hasMore={this.state.hasMore}
+          >
+            {items.map(item => (
+              <CRMItem item={item} id={item.id} />
             ))}
           </InfiniteScroll >
         </div>
