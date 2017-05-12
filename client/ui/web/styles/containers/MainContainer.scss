@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  .header {
+    height: 60px;
+    align-self: stretch;
+    background: #f38527;
+    display: flex;
+    align-items: center;
+    padding-left: 60px;
+    color: white;
+    font-size: 18px;
+  }
+}

@@ -56,6 +56,7 @@ if (config.env === 'development') {
     //   publicPath: false
     // },
     hot: true,
+    inline: true,
     historyApiFallback: true
   });
 
