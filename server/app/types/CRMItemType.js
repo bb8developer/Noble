@@ -8,12 +8,53 @@ import {
   GraphQLInt,
   GraphQLBoolean
 } from 'graphql';
+import { nodeInterface } from '../nodeInterface';
+
+const CRMItemOwnerType = new GraphQLObjectType({
+  name: 'CRMItemOwner',
+  description: 'CRM Item Owner information',
+  fields: {
+    id: globalIdField('CRMItemOwner'),
+    domain: {
+      type: GraphQLString,
+      description: 'Domain'
+    },
+    email: {
+      type: GraphQLString,
+      description: 'Email'
+    },
+    phone: {
+      type: GraphQLString,
+      description: 'Phone'
+    },
+    name: {
+      type: GraphQLString,
+      description: 'Name'
+    },
+    pic: {
+      type: GraphQLString,
+      description: 'Owner Image'
+    },
+    schedule_id: {
+      type: GraphQLString,
+      description: 'Owner Schedule ID'
+    },
+    calendar_url: {
+      type: GraphQLString,
+      description: 'Calendar URL'
+    },
+    calendarURL: {
+      type: GraphQLString,
+      description: 'Calendar URL'
+    },
+  }
+});
 
 export const CRMItemType = new GraphQLObjectType({
   name: 'CRMItem',
   description: 'CRM Item Information',
   fields: {
-    id: globalIdField('CRM'),
+    id: globalIdField('CRMItem'),
     type: {
       type: GraphQLString,
       description: 'CRM type'
@@ -97,8 +138,42 @@ export const CRMItemType = new GraphQLObjectType({
       description: 'Form ID'
     },
     browserId: {
+      type: GraphQLString,
+      description: 'Browser ID',
+      resolve: item => JSON.stringify(item.browserId),
+    },
+    lead_source_id: {
       type: GraphQLInt,
-      description: 'Browser ID'
+      description: 'Lead source ID'
+    },
+    lead_status_id: {
+      type: GraphQLInt,
+      description: 'Lead Status ID'
+    },
+    is_lead_converted: {
+      type: GraphQLBoolean,
+      description: 'Flag for Lead has been converted or not'
+    },
+    lead_converted_time: {
+      type: GraphQLInt,
+      description: 'Lead converted time'
+    },
+    is_duplicate_existed: {
+      type: GraphQLBoolean,
+      description: 'Flag for duplicated status'
+    },
+    trashed_time: {
+      type: GraphQLInt,
+      description: 'Trashed time'
+    },
+    restored_time: {
+      type: GraphQLInt,
+      description: 'Restored time'
+    },
+    owner: {
+      type: CRMItemOwnerType,
+      description: 'Owner Information'
     }
-  }
+  },
+  interfaces: [nodeInterface],
 });
