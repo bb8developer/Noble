@@ -3,7 +3,7 @@
  */
 import { GraphQLString, GraphQLInt } from 'graphql';
 import { ListCRMItemType } from '../types/ListCRMItemType';
-import { getContactByTagFilter } from '../../services/crm';
+import { getContactByTagFilter, getNoteByContacts } from '../../services/crm';
 
 export const CRMItemQuery = {
   description: 'CRM Item Query',
@@ -23,6 +23,7 @@ export const CRMItemQuery = {
     const cursor = args.cursor || '';
     const pageSize = args.pageSize || 20;
     const result = await getContactByTagFilter('affiliate_goldadvisor', cursor, pageSize);
+    await getNoteByContacts(result);
     ret.items = result;
     console.log('ret', ret);
     return ret;

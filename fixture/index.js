@@ -1,12 +1,14 @@
 /**
  * Created by nick on 11/05/2017.
  */
-import { getContactByTagFilter } from '../server/services/crm';
+import { getContactByTagFilter, getNoteByContacts } from '../server/services/crm';
 
 async function getData() {
   const cursor = 'true:CosFCsACCp0C_wDAQdZDmL2AAP8A_4yBnpiWk5rSnI2S0pyTkIqb3p2WhYyekZudkIf_AAD_dG2goJmLjKCg_wAA_12ej4-akZiWkZr_AAD_c3RtlpGbmof_AAD_XZyQkYuenIuM_wAA_3N0bZuQnKCWm_8AAP9dyc3Jz8bMzcjLzs7Jxs7Kzf8AAP9zf8nNyc_GzM3Iy87OycbOys3_AAD__wD-__7_jIGemJaTmtKcjZLSnJOQipvenZaFjJ6Rm52Qh_8AdG2goJmLjKCg_wBdno-PmpGYlpGa_wBzdG2WkZuah_8AXZyQkYuenIuM_wBzdG2bkJyglpv_AF3JzcnPxszNyMvOzsnGzsrN_wBzf8nNyc_GzM3Iy87OycbOys3_AP_-EBkh214v0Zsk1MlQAFoLCYLuBGQNABX4EAJg1byUrwMSDURvY3VtZW50SW5kZXga1AEoQU5EIChJUyAiY3VzdG9tZXJfbmFtZSIgImFwcGVuZ2luZSIpIChJUyAiZ3JvdXBfbmFtZSIgInN-YWdpbGUtY3JtLWNsb3VkIikgKElTICJuYW1lc3BhY2UiICJiaXpzYW5kYm94IikgKElTICJpbmRleF9uYW1lIiAiY29udGFjdHMiKSAoQU5EIChRVFAgImFmZmlsaWF0ZV9nb2xkYWR2aXNvciIgInJ0ZXh0X3RhZ3MiKSAoUVRQICJQRVJTT04iICJydGV4dF90eXBlIikpKToqCh0oTiAic25icl9jcmVhdGVkX3RpbWVfZXBvY2giKRABGQAAAAAAAAAAShkIADoSYnRpX2dlbmVyaWNfc2NvcmVyQOgHUhkKDChOIG9yZGVyX2lkKRABGQAAAAAAAPD_';
   const data = await getContactByTagFilter('affiliate_goldadvisor', cursor);
-  console.log('data', data, data.length);
+  console.log('getNoteByContacts start', new Date());
+  await getNoteByContacts(data);
+  console.log('getNoteByContacts end', new Date());
 }
 
 getData();

@@ -16,7 +16,9 @@ export const CRMItemFragment = Relay.QL`
         email,
         phone,
       },
-      properties
+      created_time,
+      properties,
+      note
     }
   }
 `;

@@ -86,6 +86,9 @@ type CRMItem implements Node {
 
   # Owner Information
   owner: CRMItemOwner
+
+  # Note information
+  note: String
 }
 
 # CRM Item Owner information
@@ -127,6 +130,11 @@ type ListCRMItems implements Node {
   items: [CRMItem]
 }
 
+type Mutation {
+  # Get next CRM items using cursors
+  getMoreCRMItems(input: getMoreCRMItemsInput!): getMoreCRMItemsPayload
+}
+
 # An object with an ID
 interface Node {
   # The id of the object.
@@ -162,4 +170,14 @@ type ViewerType {
 
   # User query
   user: UserType
+}
+
+input getMoreCRMItemsInput {
+  cursor: String
+  clientMutationId: String
+}
+
+type getMoreCRMItemsPayload {
+  crmItems: ListCRMItems
+  clientMutationId: String
 }

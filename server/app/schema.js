@@ -1,17 +1,9 @@
 /* eslint-disable no-unused-vars, no-use-before-define */
 import { GraphQLSchema, GraphQLObjectType } from 'graphql';
 import { nodeField } from './nodeInterface';
-import { ViewerQuery, UserQuery } from './queries';
+import { ViewerQuery } from './queries';
 import {
-  signupMutation,
-  loginMutation,
-  assignVideoMutation,
-  likeVideoMutation,
-  deleteVideoMutation,
-  searchUserMutation,
-  unAssignVideoMutation,
-  updateUsersMutation,
-  postVideoMutation
+  getMoreCRMItemsMutation
 } from './mutations';
 
 const queryType = new GraphQLObjectType({
@@ -30,6 +22,7 @@ const mutationType = new GraphQLObjectType({
   name: 'Mutation',
   fields: () => ({
     // Add your own mutations here
+    getMoreCRMItems: getMoreCRMItemsMutation
   })
 });
 
@@ -39,5 +32,5 @@ const mutationType = new GraphQLObjectType({
  */
 export default new GraphQLSchema({
   query: queryType,
-  // mutation: mutationType
+  mutation: mutationType
 });

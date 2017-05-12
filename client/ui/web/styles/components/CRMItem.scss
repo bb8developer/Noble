@@ -3,7 +3,7 @@ $borderColor: #999;
 .rowContainer {
   display: flex;
   flex-direction: row;
-  height: 30px;
+  min-height: 30px;
   border: 1px solid $borderColor;
   div {
     display: flex;
