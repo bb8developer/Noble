@@ -1,7 +1,7 @@
 /**
  * Created by nick on 11/05/2017.
  */
-import AgileCRMManager from 'agile_crm/agilecrm';
+import AgileCRMManager from './agilecrm';
 import config from '../../config/crm_config';
 
 const agileInstance = new AgileCRMManager(config.domain, config.key, config.user);
