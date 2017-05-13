@@ -4,6 +4,9 @@ type CRMItem implements Node {
   id: ID!
 
   # Next cursor
+  contactId: String
+
+  # Next cursor
   cursor: String
 
   # CRM type
@@ -133,6 +136,9 @@ type ListCRMItems implements Node {
 type Mutation {
   # Get next CRM items using cursors
   getMoreCRMItems(input: getMoreCRMItemsInput!): getMoreCRMItemsPayload
+
+  # Get notes from contact ids
+  getNotes(input: getNotesInput!): getNotesPayload
 }
 
 # An object with an ID
@@ -179,5 +185,15 @@ input getMoreCRMItemsInput {
 
 type getMoreCRMItemsPayload {
   crmItems: [CRMItem]
+  clientMutationId: String
+}
+
+input getNotesInput {
+  contactIds: [String]
+  clientMutationId: String
+}
+
+type getNotesPayload {
+  notes: [String]
   clientMutationId: String
 }

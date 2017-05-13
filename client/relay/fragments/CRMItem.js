@@ -10,6 +10,7 @@ export const CRMItemFragment = Relay.QL`
     id,
     items {
       id,
+      contactId,
       cursor,
       owner {
         name,

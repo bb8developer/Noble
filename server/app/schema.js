@@ -3,7 +3,8 @@ import { GraphQLSchema, GraphQLObjectType } from 'graphql';
 import { nodeField } from './nodeInterface';
 import { ViewerQuery } from './queries';
 import {
-  getMoreCRMItemsMutation
+  getMoreCRMItemsMutation,
+  getNotesMutation
 } from './mutations';
 
 const queryType = new GraphQLObjectType({
@@ -22,7 +23,8 @@ const mutationType = new GraphQLObjectType({
   name: 'Mutation',
   fields: () => ({
     // Add your own mutations here
-    getMoreCRMItems: getMoreCRMItemsMutation
+    getMoreCRMItems: getMoreCRMItemsMutation,
+    getNotes: getNotesMutation
   })
 });
 

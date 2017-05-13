@@ -24,8 +24,8 @@ export const CRMItem = ({ item, showNote, index }) => {
   let notes = null;
   let note = null;
   let description = 'Loading Notes...';
-  if (item.note) {
-    notes = JSON.parse(item.note);
+  if (item.notes) {
+    notes = item.notes;
     note = notes.length > 0 ? notes[0] : null;
     description = note ? note.description : '';
   }

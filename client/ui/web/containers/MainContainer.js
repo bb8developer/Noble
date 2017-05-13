@@ -2,7 +2,7 @@ import React from 'react';
 import { isEqual } from 'lodash';
 import MainContainerAction from '../../action/MainContainerAction';
 import { InfiniteScroll, CRMItem, CRMItemHeader, ContactNoteDialog } from '../../components';
-import { GetMoreCRMItemsMutation } from '../../../relay/mutations';
+import { GetMoreCRMItemsMutation, GetNotesMutation } from '../../../relay/mutations';
 import { commitUpdate } from '../../../utils';
 import ImageWaiting from '../../../assets/loading.gif';
 import styles from '../styles/containers/MainContainer.scss';
@@ -17,10 +17,13 @@ export default class MainContainer extends MainContainerAction {
       notes: [],
       name: ''
     };
+    this.getNotes(this.state.items);
   }
   componentWillReceiveProps(newProps) {
     if (!isEqual(newProps.viewer, this.props.viewer)) {
-      this.setState({ items: this.getItems(newProps) });
+      const items = this.getItems(newProps);
+      this.getNotes(items);
+      this.setState({ items });
     }
   }
   loadMore = () => {
@@ -32,9 +35,39 @@ export default class MainContainer extends MainContainerAction {
           const items = res.getMoreCRMItems.crmItems;
           const newItems = this.state.items.concat(items);
           this.setState({ items: newItems });
+          this.getNotes(items);
         });
     }
   };
+  updateContactNotes(contactItems, notes) {
+    contactItems.forEach((contact) => {
+      notes.forEach((note) => {
+        note.contact_ids.forEach((contactId) => {
+          if (contact.contactId === contactId) {
+            if (!contact.notes) {
+              contact.notes = [];
+            }
+            contact.notes.push(note);
+          }
+        });
+      });
+    });
+  }
+  getNotes(items) {
+    const contactIds = items.map(item => item.contactId);
+    if (contactIds && contactIds.length > 0) {
+      commitUpdate(GetNotesMutation, { contactIds })
+        .then((res) => {
+          console.log('GetNotesMutation', res);
+          const contactItems = this.state.items.concat();
+          res.getNotes.notes.forEach((strNote) => {
+            const notes = JSON.parse(strNote);
+            this.updateContactNotes(contactItems, notes);
+          });
+          this.setState({ items: contactItems });
+        });
+    }
+  }
   getCursor() {
     const length = this.state.items.length;
     if (length > 0) {

@@ -1,7 +1,7 @@
 /**
  * Created by nick on 12/05/2017.
  */
-import { mutationWithClientMutationId } from 'graphql-relay';
+import { mutationWithClientMutationId, fromGlobalId } from 'graphql-relay';
 import { GraphQLString, GraphQLList } from 'graphql';
 import { getNoteByContactIds } from '../../services/crm';
 
@@ -21,6 +21,7 @@ export const getNotesMutation = mutationWithClientMutationId({
 
   mutateAndGetPayload: async (input, { request }) => {
     const contactIds = input.contactIds || [];
+    console.log('contactIds', contactIds);
     const notes = await getNoteByContactIds(contactIds);
     return {
       notes

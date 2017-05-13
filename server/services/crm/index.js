@@ -42,7 +42,7 @@ export async function getNoteByContacts(contacts) {
 export async function getNoteByContactIds(ids) {
   const ret = [];
   for (let index = 0; index < ids.length; index += 1) {
-    const contactId = ids[index].id;
+    const contactId = ids[index];
     ret.push(await getNoteById(contactId));
   }
   return ret;

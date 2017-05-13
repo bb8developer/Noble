@@ -1,26 +1,14 @@
 import Relay from 'react-relay';
 
 const fatQuery = Relay.QL`
-  fragment on getMoreCRMItemsPayload {
-    crmItems {
-      id,
-      contactId,
-      cursor,
-      owner {
-        name,
-        id,
-        email,
-        phone,
-      },
-      created_time,
-      properties,
-    }
+  fragment on getNotesPayload {
+    notes
   }
 `;
-export class GetMoreCRMItemsMutation extends Relay.Mutation {
+export class GetNotesMutation extends Relay.Mutation {
   getMutation() {
     return Relay.QL`
-      mutation { getMoreCRMItems }
+      mutation { getNotes }
     `;
   }
 
@@ -29,7 +17,7 @@ export class GetMoreCRMItemsMutation extends Relay.Mutation {
    * @cursor: cursor
    */
   getVariables() {
-    return { cursor: this.props.cursor };
+    return { contactIds: this.props.contactIds };
   }
 
   getFatQuery() {

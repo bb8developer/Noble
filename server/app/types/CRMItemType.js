@@ -55,6 +55,11 @@ export const CRMItemType = new GraphQLObjectType({
   description: 'CRM Item Information',
   fields: {
     id: globalIdField('CRMItem'),
+    contactId: {
+      type: GraphQLString,
+      description: 'Next cursor',
+      resolve: item => item.id
+    },
     cursor: {
       type: GraphQLString,
       description: 'Next cursor'
