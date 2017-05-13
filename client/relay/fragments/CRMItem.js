@@ -19,7 +19,6 @@ export const CRMItemFragment = Relay.QL`
       },
       created_time,
       properties,
-      note
     }
   }
 `;

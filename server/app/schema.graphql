@@ -89,9 +89,6 @@ type CRMItem implements Node {
 
   # Owner Information
   owner: CRMItemOwner
-
-  # Note information
-  note: String
 }
 
 # CRM Item Owner information

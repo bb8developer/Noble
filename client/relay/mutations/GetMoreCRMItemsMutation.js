@@ -13,7 +13,6 @@ const fatQuery = Relay.QL`
       },
       created_time,
       properties,
-      note
     }
   }
 `;

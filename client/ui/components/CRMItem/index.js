@@ -21,10 +21,16 @@ export const CRMItem = ({ item, showNote, index }) => {
       name = `${name} ${property.value[0].toUpperCase()}.`;
     }
   });
-  const notes = JSON.parse(item.note);
-  const note = notes.length > 0 ? notes[0] : null;
+  let notes = null;
+  let note = null;
+  let description = 'Loading Notes...';
+  if (item.note) {
+    notes = JSON.parse(item.note);
+    note = notes.length > 0 ? notes[0] : null;
+    description = note ? note.description : '';
+  }
   const renderNotes = () => {
-    if (notes.length > 0) {
+    if (notes && notes.length > 0) {
       return (
         <div className={styles.viewNote} onClick={() => showNote(notes, name)}>
           View all notes({notes.length})
@@ -42,7 +48,7 @@ export const CRMItem = ({ item, showNote, index }) => {
         {moment(createdDate).format('MMM Do hh:mm a')}
       </div>
       <div className={styles.lastNote}>
-        {note && note.description}
+        {description}
       </div>
       <div className={styles.lastNoteDate}>
         {note && moment(note.created_time * 1000).format('MMM Do hh:mm a')}

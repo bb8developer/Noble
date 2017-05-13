@@ -177,10 +177,6 @@ export const CRMItemType = new GraphQLObjectType({
     owner: {
       type: CRMItemOwnerType,
       description: 'Owner Information'
-    },
-    note: {
-      type: GraphQLString,
-      description: 'Note information',
     }
   },
   interfaces: [nodeInterface],

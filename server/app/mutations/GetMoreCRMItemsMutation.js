@@ -4,7 +4,7 @@
 import { mutationWithClientMutationId } from 'graphql-relay';
 import { GraphQLString, GraphQLList } from 'graphql';
 import { CRMItemType } from '../types/CRMItemType';
-import { getContactByTagFilter, getNoteByContacts } from '../../services/crm';
+import { getContactByTagFilter } from '../../services/crm';
 
 export const getMoreCRMItemsMutation = mutationWithClientMutationId({
   name: 'getMoreCRMItems',
@@ -23,7 +23,6 @@ export const getMoreCRMItemsMutation = mutationWithClientMutationId({
   mutateAndGetPayload: async (input, { request }) => {
     const cursor = input.cursor || '';
     const crmItems = await getContactByTagFilter('affiliate_goldadvisor', cursor, 20);
-    await getNoteByContacts(crmItems);
     return {
       crmItems
     };
