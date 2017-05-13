@@ -13,7 +13,7 @@ export default class MainContainer extends MainContainerAction {
     this.state = {
       hasMore: true,
       items: this.getItems(props),
-      showNoteDialog: true,
+      showNoteDialog: false,
       notes: [],
       name: ''
     };
@@ -51,6 +51,9 @@ export default class MainContainer extends MainContainerAction {
   showNote = (notes, name) => {
     this.setState({ showNoteDialog: true, notes, name });
   };
+  closeNoteDialog = () => {
+    this.setState({ showNoteDialog: false, notes: [], name: '' });
+  };
   renderLoader() {
     return (
       <div className={styles.loader}>
@@ -60,7 +63,7 @@ export default class MainContainer extends MainContainerAction {
     );
   }
   render() {
-    const { items, showNoteDialog, notes } = this.state;
+    const { items, showNoteDialog, notes, name } = this.state;
     return (
       <div className={styles.container}>
         <div className={styles.header}>
@@ -84,7 +87,7 @@ export default class MainContainer extends MainContainerAction {
           </InfiniteScroll >
         </div>
         {showNoteDialog &&
-        <ContactNoteDialog notes={notes} />
+        <ContactNoteDialog notes={notes} name={name} onClose={this.closeNoteDialog} />
         }
       </div>
     );
