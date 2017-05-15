@@ -3,11 +3,12 @@ import { CRMItemFragment } from '../fragments';
 
 export default {
   initialVariables: {
+    query: ''
   },
   fragments: {
     viewer: () => Relay.QL`
       fragment on ViewerType {
-        crmItems {
+        crmItems(query: $query) {
           ${CRMItemFragment}
         }
       }`

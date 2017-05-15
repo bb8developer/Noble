@@ -29,7 +29,8 @@ export class GetMoreCRMItemsMutation extends Relay.Mutation {
    * @cursor: cursor
    */
   getVariables() {
-    return { cursor: this.props.cursor };
+    const { cursor, query } = this.props;
+    return { cursor, query };
   }
 
   getFatQuery() {

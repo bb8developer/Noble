@@ -5,7 +5,7 @@ import { AppContainer, MainContainer } from '../relay/containers';
 
 export default (
   <Route
-    path='/'
+    path='/:keywords'
     component={AppContainer}
     queries={ViewerQuery}
     render={(params) => {
@@ -29,7 +29,6 @@ export default (
         return <AppContainer loading />;
       }}
     />
-    <Redirect from='*' to='/' />
   </Route>
 );
 

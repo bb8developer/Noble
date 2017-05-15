@@ -6,7 +6,6 @@ import { browserHistory, applyRouterMiddleware, Router } from 'react-router';
 import useRelay from 'react-router-relay';
 import '../node_modules/react-mdl/extra/material';
 import Route from './routes/Route';
-import MobileRoute from './routes/MobileRoute';
 import refreshRelayNetwork from './relay/refreshRelayNetwork';
 
 require('babel-core/register');
@@ -19,7 +18,7 @@ document.body.appendChild(rootNode);
 const detector = new MobileDetect(window.navigator.userAgent);
 if (detector.mobile()) {
   ReactDOM.render(
-    <Router history={browserHistory} routes={MobileRoute} render={applyRouterMiddleware(useRelay)} environment={Relay.Store} />,
+    <Router history={browserHistory} routes={Route} render={applyRouterMiddleware(useRelay)} environment={Relay.Store} />,
     rootNode
   );
 } else {

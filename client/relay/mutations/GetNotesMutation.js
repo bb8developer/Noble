@@ -20,7 +20,8 @@ export class GetNotesMutation extends Relay.Mutation {
    * @cursor: cursor
    */
   getVariables() {
-    return { contactIds: this.props.contactIds };
+    const { contactIds } = this.props;
+    return { contactIds };
   }
 
   getFatQuery() {
