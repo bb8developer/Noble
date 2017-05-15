@@ -957,15 +957,15 @@
           "description": null,
           "fields": [
             {
-              "name": "notes",
+              "name": "contactNotes",
               "description": null,
               "args": [],
               "type": {
                 "kind": "LIST",
                 "name": null,
                 "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
+                  "kind": "OBJECT",
+                  "name": "NoteType",
                   "ofType": null
                 }
               },
@@ -975,6 +975,41 @@
             {
               "name": "clientMutationId",
               "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "NoteType",
+          "description": "CRM Note Information",
+          "fields": [
+            {
+              "name": "contactId",
+              "description": "Contact ID",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "notes",
+              "description": "note information",
               "args": [],
               "type": {
                 "kind": "SCALAR",

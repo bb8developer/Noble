@@ -27,7 +27,7 @@ export const CRMItem = ({ item, showNote, index }) => {
   if (item.notes) {
     notes = item.notes;
     note = notes.length > 0 ? notes[0] : null;
-    description = note ? note.description : '';
+    description = note ? note.description : 'No Notes';
   }
   const renderNotes = () => {
     if (notes && notes.length > 0) {

@@ -1,10 +1,24 @@
 /**
  * Created by nick on 12/05/2017.
  */
-import { mutationWithClientMutationId, fromGlobalId } from 'graphql-relay';
-import { GraphQLString, GraphQLList } from 'graphql';
+import { mutationWithClientMutationId } from 'graphql-relay';
+import { GraphQLString, GraphQLList, GraphQLObjectType } from 'graphql';
 import { getNoteByContactIds } from '../../services/crm';
 
+export const NoteType = new GraphQLObjectType({
+  name: 'NoteType',
+  description: 'CRM Note Information',
+  fields: {
+    contactId: {
+      type: GraphQLString,
+      description: 'Contact ID',
+    },
+    notes: {
+      type: GraphQLString,
+      description: 'note information'
+    },
+  }
+});
 export const getNotesMutation = mutationWithClientMutationId({
   name: 'getNotes',
   inputFields: {
@@ -14,17 +28,17 @@ export const getNotesMutation = mutationWithClientMutationId({
   },
   description: 'Get notes from contact ids',
   outputFields: {
-    notes: {
-      type: new GraphQLList(GraphQLString),
+    contactNotes: {
+      type: new GraphQLList(NoteType),
     }
   },
 
   mutateAndGetPayload: async (input, { request }) => {
     const contactIds = input.contactIds || [];
-    console.log('contactIds', contactIds);
-    const notes = await getNoteByContactIds(contactIds);
+    const contactNotes = await getNoteByContactIds(contactIds);
     return {
-      notes
+      contactNotes
     };
+    console.log('contactNotes', contactIds, contactNotes);
   }
 });

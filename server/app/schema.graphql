@@ -147,6 +147,15 @@ interface Node {
   id: ID!
 }
 
+# CRM Note Information
+type NoteType {
+  # Contact ID
+  contactId: String
+
+  # note information
+  notes: String
+}
+
 type Query {
   # Fetches an object given its ID
   node(
@@ -194,6 +203,6 @@ input getNotesInput {
 }
 
 type getNotesPayload {
-  notes: [String]
+  contactNotes: [NoteType]
   clientMutationId: String
 }

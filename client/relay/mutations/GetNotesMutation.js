@@ -2,7 +2,10 @@ import Relay from 'react-relay';
 
 const fatQuery = Relay.QL`
   fragment on getNotesPayload {
-    notes
+    contactNotes {
+      contactId,
+      notes
+    }
   }
 `;
 export class GetNotesMutation extends Relay.Mutation {

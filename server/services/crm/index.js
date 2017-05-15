@@ -43,7 +43,10 @@ export async function getNoteByContactIds(ids) {
   const ret = [];
   for (let index = 0; index < ids.length; index += 1) {
     const contactId = ids[index];
-    ret.push(await getNoteById(contactId));
+    ret.push({
+      notes: await getNoteById(contactId),
+      contactId
+    });
   }
   return ret;
 }

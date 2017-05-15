@@ -39,18 +39,16 @@ export default class MainContainer extends MainContainerAction {
         });
     }
   };
-  updateContactNotes(contactItems, notes) {
+  updateContactNotes(contactItems, contactId, notes) {
     contactItems.forEach((contact) => {
-      notes.forEach((note) => {
-        note.contact_ids.forEach((contactId) => {
-          if (contact.contactId === contactId) {
-            if (!contact.notes) {
-              contact.notes = [];
-            }
-            contact.notes.push(note);
-          }
-        });
-      });
+      if (contact.contactId === contactId) {
+        if (!contact.notes) {
+          contact.notes = [];
+        }
+        if (notes.length > 0) {
+          contact.notes = contact.notes.concat(notes);
+        }
+      }
     });
   }
   getNotes(items) {
@@ -60,9 +58,9 @@ export default class MainContainer extends MainContainerAction {
         .then((res) => {
           console.log('GetNotesMutation', res);
           const contactItems = this.state.items.concat();
-          res.getNotes.notes.forEach((strNote) => {
-            const notes = JSON.parse(strNote);
-            this.updateContactNotes(contactItems, notes);
+          res.getNotes.contactNotes.forEach((item) => {
+            const notes = JSON.parse(item.notes);
+            this.updateContactNotes(contactItems, item.contactId, notes);
           });
           this.setState({ items: contactItems });
         });
