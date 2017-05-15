@@ -135,6 +135,16 @@
                     "ofType": null
                   },
                   "defaultValue": null
+                },
+                {
+                  "name": "query",
+                  "description": "search keyword",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  },
+                  "defaultValue": null
                 }
               ],
               "type": {
@@ -855,6 +865,16 @@
             {
               "name": "cursor",
               "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "query",
+              "description": "search keyword",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",

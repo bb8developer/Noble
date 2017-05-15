@@ -181,6 +181,9 @@ type ViewerType {
 
     # CRM Items Fetching size
     pageSize: Int
+
+    # search keyword
+    query: String
   ): ListCRMItems
 
   # User query
@@ -189,6 +192,9 @@ type ViewerType {
 
 input getMoreCRMItemsInput {
   cursor: String
+
+  # search keyword
+  query: String
   clientMutationId: String
 }
 

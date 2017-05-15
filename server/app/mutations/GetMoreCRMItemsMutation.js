@@ -12,6 +12,10 @@ export const getMoreCRMItemsMutation = mutationWithClientMutationId({
     cursor: {
       type: GraphQLString
     },
+    query: {
+      type: GraphQLString,
+      description: 'search keyword'
+    }
   },
   description: 'Get next CRM items using cursors',
   outputFields: {
@@ -22,7 +26,8 @@ export const getMoreCRMItemsMutation = mutationWithClientMutationId({
 
   mutateAndGetPayload: async (input, { request }) => {
     const cursor = input.cursor || '';
-    const crmItems = await getContactByTagFilter('affiliate_goldadvisor', cursor, 20);
+    const query = input.query || '';
+    const crmItems = await getContactByTagFilter(query, cursor, 20);
     return {
       crmItems
     };

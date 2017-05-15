@@ -17,19 +17,33 @@ export default class MainContainer extends MainContainerAction {
       notes: [],
       name: ''
     };
+    this.updateRelayVariable(props.params);
     this.getNotes(this.state.items);
   }
   componentWillReceiveProps(newProps) {
+    if (!isEqual(newProps.params, this.props.params)) {
+      this.updateRelayVariable(newProps.params);
+    }
     if (!isEqual(newProps.viewer, this.props.viewer)) {
       const items = this.getItems(newProps);
       this.getNotes(items);
       this.setState({ items });
     }
   }
+  updateRelayVariable(param) {
+    const { relay } = this.props;
+    const query = relay.variables.query;
+    const keywords = param.keywords.split('_');
+    if (keywords[0] === 'noble' && query !== keywords[1]) {
+      relay.forceFetch({ query: keywords[1] });
+    }
+  }
   loadMore = () => {
+    const { relay } = this.props;
     const cursor = this.getCursor();
+    const query = relay.variables.query;
     if (cursor && cursor.length > 0) {
-      commitUpdate(GetMoreCRMItemsMutation, { cursor })
+      commitUpdate(GetMoreCRMItemsMutation, { cursor, query })
         .then((res) => {
           console.log('GetMoreCRMItemsMutation', res);
           const items = res.getMoreCRMItems.crmItems;

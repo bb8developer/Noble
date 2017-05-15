@@ -17,7 +17,11 @@ export function getContactByTagFilter(tag, cursor, pageSize = 20) {
       console.log('getContactByTagFilter failuer');
       reject();
     }
-    contactAPI.getContactsByTagFilter(tag, cursor, pageSize, success, error);
+    if (tag && tag.length > 0) {
+      contactAPI.getContactsByTagFilter(`affiliate_${tag}`, cursor, pageSize, success, error);
+    } else {
+      resolve([]);
+    }
   });
 }
 export function getNoteById(contactID) {

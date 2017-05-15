@@ -17,13 +17,18 @@ export const CRMItemQuery = {
       type: GraphQLInt,
       description: 'CRM Items Fetching size'
     },
+    query: {
+      type: GraphQLString,
+      description: 'search keyword'
+    }
   },
   resolve: async (arg1, args, { request }) => {
     const ret = { id: '', items: [] };
     const cursor = args.cursor || '';
+    const query = args.query || '';
     const pageSize = args.pageSize || 20;
     console.log('get items');
-    const result = await getContactByTagFilter('affiliate_goldadvisor', cursor, pageSize);
+    const result = await getContactByTagFilter(query, cursor, pageSize);
     ret.items = result;
     return ret;
   },

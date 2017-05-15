@@ -16,6 +16,7 @@ $borderColor: #999;
   }
   .name {
     flex: 1;
+    min-width: 55px;
     border-right: 1px solid $borderColor;
   }
   .created {
@@ -42,8 +43,9 @@ $borderColor: #999;
   background-color: #F0F0F0;
 }
 .normalContainer, .grayContainer {
-  border: 0px solid $borderColor;
-  border-bottom: 1px solid $borderColor;
+  //border: 0px solid $borderColor;
+  border-top: 0px solid $borderColor;
+
 }
 .normalContainer:hover, .grayContainer:hover {
   background-color: #DDD;
