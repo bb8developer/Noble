@@ -24,33 +24,27 @@ export function getContactByTagFilter(tag, cursor, pageSize = 20) {
     }
   });
 }
-export function getNoteById(contactID) {
+export function getNoteById(contactId) {
   return new Promise((resolve, reject) => {
     function success(data) {
-      resolve(data);
+      resolve({
+        notes: data,
+        contactId,
+      });
     }
     function error() {
       console.log('error on resolve');
       reject();
     }
-    contactAPI.getNoteByContactId(contactID, success, error);
+    contactAPI.getNoteByContactId(contactId, success, error);
   });
 }
 
-export async function getNoteByContacts(contacts) {
-  for (let index = 0; index < contacts.length; index += 1) {
-    const contactId = contacts[index].id;
-    contacts[index].note = await getNoteById(contactId);
-  }
-}
 export async function getNoteByContactIds(ids) {
   const ret = [];
   for (let index = 0; index < ids.length; index += 1) {
     const contactId = ids[index];
-    ret.push({
-      notes: await getNoteById(contactId),
-      contactId
-    });
+    ret.push(await getNoteById(contactId));
   }
   return ret;
 }

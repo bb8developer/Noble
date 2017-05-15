@@ -3,7 +3,7 @@
  */
 import { mutationWithClientMutationId } from 'graphql-relay';
 import { GraphQLString, GraphQLList, GraphQLObjectType } from 'graphql';
-import { getNoteByContactIds } from '../../services/crm';
+import { noteLoader } from '../dataloader';
 
 export const NoteType = new GraphQLObjectType({
   name: 'NoteType',
@@ -35,10 +35,10 @@ export const getNotesMutation = mutationWithClientMutationId({
 
   mutateAndGetPayload: async (input, { request }) => {
     const contactIds = input.contactIds || [];
-    const contactNotes = await getNoteByContactIds(contactIds);
+    const contactNotes = await noteLoader.loadMany(contactIds);
+    console.log('contactNotes', contactIds, contactNotes);
     return {
       contactNotes
     };
-    console.log('contactNotes', contactIds, contactNotes);
   }
 });

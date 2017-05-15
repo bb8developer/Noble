@@ -3,7 +3,7 @@
  */
 import { GraphQLString, GraphQLInt } from 'graphql';
 import { ListCRMItemType } from '../types/ListCRMItemType';
-import { getContactByTagFilter, getNoteByContacts } from '../../services/crm';
+import { contactLoader } from '../dataloader';
 
 export const CRMItemQuery = {
   description: 'CRM Item Query',
@@ -25,10 +25,10 @@ export const CRMItemQuery = {
   resolve: async (arg1, args, { request }) => {
     const ret = { id: '', items: [] };
     const cursor = args.cursor || '';
-    const query = args.query || '';
+    const tag = args.query || '';
     const pageSize = args.pageSize || 20;
     console.log('get items');
-    const result = await getContactByTagFilter(query, cursor, pageSize);
+    const result = await contactLoader.load({ tag, cursor, pageSize });
     ret.items = result;
     return ret;
   },
