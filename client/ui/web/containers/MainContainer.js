@@ -109,10 +109,16 @@ export default class MainContainer extends MainContainerAction {
   }
   render() {
     const { items, showNoteDialog, notes, name } = this.state;
+    let title = '';
+    if (this.props.params && this.props.params.keywords) {
+      title = this.props.params.keywords.split('_').join(' ');
+      title = title.toUpperCase();
+      title = `${title} DASHBOARD`;
+    }
     return (
       <div className={styles.container}>
         <div className={styles.header}>
-          <div>NOBLE GOLD AFFILIATE DASHBOARD1</div>
+          <div>{title}</div>
         </div>
         <div>
           <InfiniteScroll
