@@ -62,7 +62,7 @@ export class InfiniteScroll extends React.Component {
     return (
       <div ref={ref => (this.instanceRef = ref)}>
         {props.children}
-        {props.hasMore && props.loader}
+        {props.hasMore ? props.loader : props.noLoader}
       </div>
     );
   }

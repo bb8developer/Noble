@@ -14,7 +14,7 @@ export function getContactByTagFilter(tag, cursor, pageSize = 20) {
       resolve(data);
     }
     function error() {
-      console.log('getContactByTagFilter failuer');
+      console.log('getContactByTagFilter failer');
       reject();
     }
     if (tag && tag.length > 0) {

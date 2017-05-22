@@ -17,7 +17,6 @@ export const getNode = async (globalId) => {
     const Class = types[typeName].model;
     // let result  = Object.create(types[typeName].model, object1);
     const result = new Class(object1);
-    console.log('getNode result', result);
     return result;
   }
   return null;

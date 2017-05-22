@@ -27,8 +27,9 @@ export const getMoreCRMItemsMutation = mutationWithClientMutationId({
   mutateAndGetPayload: async (input, { request }) => {
     const cursor = input.cursor || '';
     const tag = input.query || '';
-    const pageSize = 20;
-    const crmItems = await contactLoader.load({ tag, cursor, pageSize });
+    const pageSize = input.pageSize || 20;
+    const loaderQuery = `${tag}::${cursor}::${pageSize}`;
+    const crmItems = await contactLoader.load(loaderQuery);
     return {
       crmItems
     };

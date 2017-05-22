@@ -27,9 +27,8 @@ export const CRMItemQuery = {
     const cursor = args.cursor || '';
     const tag = args.query || '';
     const pageSize = args.pageSize || 20;
-    console.log('get items');
-    const result = await contactLoader.load({ tag, cursor, pageSize });
-    ret.items = result;
+    const loaderQuery = `${tag}::${cursor}::${pageSize}`;
+    ret.items = await contactLoader.load(loaderQuery);
     return ret;
   },
 };

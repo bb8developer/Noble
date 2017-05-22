@@ -36,7 +36,6 @@ export const getNotesMutation = mutationWithClientMutationId({
   mutateAndGetPayload: async (input, { request }) => {
     const contactIds = input.contactIds || [];
     const contactNotes = await noteLoader.loadMany(contactIds);
-    console.log('contactNotes', contactIds, contactNotes);
     return {
       contactNotes
     };

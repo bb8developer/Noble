@@ -46,10 +46,13 @@ export default class MainContainer extends MainContainerAction {
       commitUpdate(GetMoreCRMItemsMutation, { cursor, query })
         .then((res) => {
           console.log('GetMoreCRMItemsMutation', res);
-          const items = res.getMoreCRMItems.crmItems;
+          let items = [{ id: 'empty_item', empty: true }];
+          if (res.getMoreCRMItems.crmItems.length > 0) {
+            items = res.getMoreCRMItems.crmItems;
+            this.getNotes(items);
+          }
           const newItems = this.state.items.concat(items);
           this.setState({ items: newItems });
-          this.getNotes(items);
         });
     }
   };
@@ -83,7 +86,7 @@ export default class MainContainer extends MainContainerAction {
   getCursor() {
     const length = this.state.items.length;
     if (length > 0) {
-      return this.state.items[length - 1].cursor;
+      return this.state.items[length - 1].cursor || '';
     }
     return '';
   }
@@ -107,6 +110,13 @@ export default class MainContainer extends MainContainerAction {
       </div>
     );
   }
+  renderNoLoader() {
+    return (
+      <div className={styles.loader}>
+        No more leads...
+      </div>
+    );
+  }
   render() {
     const { items, showNoteDialog, notes, name } = this.state;
     let title = '';
@@ -123,6 +133,7 @@ export default class MainContainer extends MainContainerAction {
         <div>
           <InfiniteScroll
             loader={this.renderLoader()}
+            noLoader={this.renderNoLoader()}
             loadMore={this.loadMore}
             hasMore={this.getCursor().length > 0}
           >

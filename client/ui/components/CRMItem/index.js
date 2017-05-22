@@ -6,6 +6,9 @@ import moment from 'moment';
 import styles from '../../web/styles/components/CRMItem.scss';
 
 export const CRMItem = ({ item, showNote, index }) => {
+  if (item.empty) {
+    return <div />;
+  }
   let rowStyle = styles.normalContainer;
   if (index % 2 === 0) {
     rowStyle = styles.grayContainer;
