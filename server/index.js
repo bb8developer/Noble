@@ -12,6 +12,7 @@ import config from './config/environment';
 import schema from './app/schema';
 
 require('babel-polyfill');
+
 let relayServer = null;
 
 const graphql = express();

@@ -35,4 +35,4 @@ export const ContactNoteDialog = ({ onClose, notes, name }) => {
       </div>
     </div>
   );
-}
+};
